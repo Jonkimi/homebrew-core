@@ -116,7 +116,8 @@ class OpensslAT3 < Formula
     system "perl", "./Configure", *(configure_args + arch_args)
     system "make"
     system "make", "install", "MANDIR=#{man}", "MANSUFFIX=ssl"
-    system "make", "test"
+    # temp fix https://github.com/openssl/openssl/issues/22467
+    system "make", "test TESTS='-test-cmp_http'"
   end
 
   def openssldir
